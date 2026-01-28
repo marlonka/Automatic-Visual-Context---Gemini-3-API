@@ -1,0 +1,8 @@
+{
+  "name": "Automatic Visual Context",
+  "description": "An intelligent interface that dynamically solicits missing context via Generative UI before executing complex tasks. Uses State-of-the-Art Gemini 3 API with tools like Google Search Grounding and URL Context to further enhance the answer quality.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

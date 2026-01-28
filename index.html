@@ -1,0 +1,162 @@
+<!-- 
+  @fileoverview Application Entry Point & Global Style Registry.
+  
+  ARCHITECTURE:
+  This file serves as the root context for the Single Page Application (SPA).
+  It establishes the visual foundation, typography system, and dependency graph.
+  
+  DESIGN PHILOSOPHY:
+  - Typography: Pairing 'Plus Jakarta Sans' (Geometric Humanist) with 'JetBrains Mono' 
+    to balance approachability with technical precision.
+  - Motion Design: Implementing custom cubic-bezier curves to create "organic" 
+    micro-interactions that feel responsive rather than linear.
+  - Dependency Management: Utilizing native ES Modules via Import Maps for 
+    zero-build-step compatibility and high performance.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Viewport configuration for consistent rendering across mobile and desktop surfaces -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic Visual Context</title>
+    
+    <!-- 
+      CSS FRAMEWORK: Tailwind CSS (Runtime)
+      Used here for rapid UI composition. In a production build pipeline, 
+      this would be replaced by a compile-step PostCSS extraction.
+    -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <!-- 
+      TYPOGRAPHY SYSTEM:
+      1. Plus Jakarta Sans: High x-height, geometric sans-serif for UI legibility.
+      2. JetBrains Mono: Ligature-rich monospace for code and data visualization.
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+      /* Global Reset & Base Font Settings */
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #fafafa;
+        color: #0f172a;
+        letter-spacing: -0.01em; /* Tight tracking for a modern, dense feel */
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      
+      html {
+        -webkit-font-smoothing: antialiased; /* Crisp text rendering on MacOS */
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+      }
+
+      /* 
+         MOTION SYSTEM:
+         Custom keyframes using specific cubic-bezier curves (0.16, 1, 0.3, 1)
+         to mimic the physics of friction and weight. This creates a "Premium" feel
+         compared to standard linear or ease-in-out animations.
+         
+         UPDATED: Increased durations and added 'both' fill-mode to support 
+         staggered entrance animations without flash-of-unstyled-content.
+      */
+      @keyframes premium-fade-in {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes premium-slide-up {
+        0% { opacity: 0; transform: translateY(40px) scale(0.98); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes premium-scale-in {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      /* 
+        Using 'animation-fill-mode: both' ensures elements maintain their 'from' state
+        (invisible/offset) during any animation-delay period. 
+      */
+      .animate-fadeIn { animation: premium-fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+      .animate-slideUp { animation: premium-slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+      .animate-scaleIn { animation: premium-scale-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+      
+      /* 
+         ELEVATION SYSTEM:
+         Multi-layered shadows to create depth without harsh borders.
+      */
+      .shadow-premium {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+      }
+      .shadow-premium-xl {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.03), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+      }
+
+      /* Custom Scrollbar for aesthetic consistency */
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background-color: #e2e8f0; border-radius: 20px; }
+      ::-webkit-scrollbar-thumb:hover { background-color: #cbd5e1; }
+
+      /* Glassmorphism utility for floating inputs */
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      /* 
+         MARKDOWN RENDERING OVERRIDES:
+         Tweaking the 'prose' plugin defaults to increase readability for 
+         AI-generated content (wider line-heights, distinct margins).
+      */
+      .prose p {
+        margin-top: 1.25em !important;
+        margin-bottom: 1.25em !important;
+        line-height: 1.75;
+      }
+      .prose p:first-child { margin-top: 0 !important; }
+      .prose p:last-child { margin-bottom: 0 !important; }
+      
+      .prose h1, .prose h2, .prose h3 {
+        margin-top: 1.5em !important;
+        margin-bottom: 0.5em !important;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+      }
+      .prose ul, .prose ol {
+        margin-top: 1em !important;
+        margin-bottom: 1em !important;
+      }
+      .prose li {
+        margin-top: 0.25em !important;
+        margin-bottom: 0.25em !important;
+      }
+    </style>
+
+    <!-- 
+      DEPENDENCY MANAGEMENT (Import Map):
+      Maps bare module specifiers to ESM-ready CDN URLs.
+      Allows utilizing the React ecosystem without a complex bundler config.
+    -->
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-markdown": "https://esm.sh/react-markdown@^10.1.0"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <!-- React Application Mount Point -->
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
