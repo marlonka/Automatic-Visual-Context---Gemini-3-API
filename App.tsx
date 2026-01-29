@@ -348,7 +348,7 @@ function App() {
               Automatic Visual Context
             </h1>
             <p className="text-[10px] sm:text-sm font-bold text-slate-400 tracking-wide uppercase sm:normal-case sm:font-medium sm:tracking-normal">
-              Automatic Context Engineering powered by Gemini 3
+              provides Gemini 3 with the right context easily
             </p>
           </div>
           
