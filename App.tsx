@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { sendMessageToGemini } from './services/geminiService';
@@ -119,7 +120,7 @@ function App() {
     {
       id: 'init',
       role: 'ai',
-      content: "What's your goal? Describe what you're working on or a problem you're facing, and I'll help you give me the right context for better AI answers."
+      content: "I am your intelligent Context Engineer. Describe your goal, and I'll analyze what's missing—architecting a custom interface to gather the perfect context for a flawless answer."
     }
   ]);
   const [input, setInput] = useState('');
@@ -149,7 +150,7 @@ function App() {
       {
         id: 'init',
         role: 'ai',
-        content: "What's your goal? Describe what you're working on or a problem you're facing, and I'll help you give me the right context for better AI answers."
+        content: "I am your intelligent Context Engineer. Describe your goal, and I'll analyze what's missing—architecting a custom interface to gather the perfect context for a flawless answer."
       }
     ]);
     setInput('');
@@ -347,7 +348,7 @@ function App() {
               Automatic Visual Context
             </h1>
             <p className="text-[10px] sm:text-sm font-bold text-slate-400 tracking-wide uppercase sm:normal-case sm:font-medium sm:tracking-normal">
-              Helping you get better AI results easily
+              Automatic Context Engineering powered by Gemini 3
             </p>
           </div>
           

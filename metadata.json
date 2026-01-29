@@ -1,6 +1,6 @@
 {
   "name": "Automatic Visual Context",
-  "description": "An intelligent interface that dynamically solicits missing context via Generative UI before executing complex tasks. Uses State-of-the-Art Gemini 3 API with tools like Google Search Grounding and URL Context to further enhance the answer quality.",
+  "description": "Shifts the burden of prompt engineering from the user to the model. Uses Gemini 3 to act as an intelligent Context Engineer, soliciting missing information via Generative UI to guarantee high-quality results.",
   "requestFramePermissions": [
     "camera",
     "microphone"
